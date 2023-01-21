@@ -1,6 +1,8 @@
 package com.papudev.medicoapp_challenge.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "paciente")
@@ -9,16 +11,22 @@ public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPaciente;
+    @Size(min = 3, message = "Nombre debe tener minimo 3 caracteres")
     @Column(name = "nombres", nullable = false,length = 70)
     private String nombres;
+    @Size(min = 3, message = "Apellidos debe tener minimo 3 caracteres")//constrain
     @Column(name = "apellidos", nullable = false,length = 70)
     private String apellidos;
+    @Size(min = 8, max = 8, message = "DNI debe tener minimo 8 caracteres")
     @Column(name = "dni", nullable = false,length = 8)
     private String dni;
+    @Size(min = 3, max = 150, message = "Direccion debe tener minimo 3 caracteres")
     @Column(name = "direccion", nullable = true,length = 150)
     private String direccion;
+    @Size(min = 9, max = 9, message = "Telefono debe tener minimo 9 caracteres")
     @Column(name = "telefono", nullable = true,length = 20)
     private String telefono;
+    @Email
     @Column(name = "email", nullable = true,length = 55)
     private String email;
 
