@@ -1,7 +1,10 @@
 package com.papudev.medicoapp_challenge.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -11,9 +14,11 @@ public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPaciente;
+    @Schema(description = "nombres del paciente")
     @Size(min = 3, message = "Nombre debe tener minimo 3 caracteres")
     @Column(name = "nombres", nullable = false,length = 70)
     private String nombres;
+    @NotNull
     @Size(min = 3, message = "Apellidos debe tener minimo 3 caracteres")//constrain
     @Column(name = "apellidos", nullable = false,length = 70)
     private String apellidos;
