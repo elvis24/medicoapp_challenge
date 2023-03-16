@@ -18,7 +18,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
     String mensaje = "";
 
     @ExceptionHandler(Exception.class)
-    public final ResponseEntity<ExceptionResponse> manejarTodasExcepciones(ModeloNotFoundException ex, WebRequest request){
+    public final ResponseEntity<ExceptionResponse> manejarTodasExcepciones(Exception ex, WebRequest request){
         ExceptionResponse er = new ExceptionResponse(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<ExceptionResponse>(er, HttpStatus.INTERNAL_SERVER_ERROR);
     }

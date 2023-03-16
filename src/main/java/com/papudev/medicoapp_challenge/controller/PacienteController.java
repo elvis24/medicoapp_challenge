@@ -27,14 +27,14 @@ public class PacienteController {
     private IPacienteService service;
 
     @GetMapping
-    public ResponseEntity<List<Paciente>> listar(){
+    public ResponseEntity<List<Paciente>> listar() throws Exception{
         List<Paciente> list = service.listar();
         return new ResponseEntity<List<Paciente>>(list, HttpStatus.OK);
     }
 
     //nivel de madurez 3
     @GetMapping("/hateoas/{id}")
-    public EntityModel<Paciente> listarPorIdHateoas(@PathVariable("id") Integer id){
+    public EntityModel<Paciente> listarPorIdHateoas(@PathVariable("id") Integer id) throws  Exception{
         Paciente obj = service.listarPorId(id);
         if(obj.getIdPaciente() ==null){
             throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
@@ -47,7 +47,7 @@ public class PacienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Paciente> listarPorId(@PathVariable("id") Integer id){
+    public ResponseEntity<Paciente> listarPorId(@PathVariable("id") Integer id) throws Exception{
         Paciente obj = service.listarPorId(id);
         if(obj.getIdPaciente() ==null){
             throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
@@ -61,20 +61,20 @@ public class PacienteController {
         return new ResponseEntity<Paciente>(obj, HttpStatus.CREATED);
     }*/
    @PostMapping
-   public ResponseEntity<Void> registrar(@Valid @RequestBody Paciente paciente){
-       Paciente obj = service.modificar(paciente);
+   public ResponseEntity<Void> registrar(@Valid @RequestBody Paciente paciente) throws Exception{
+       Paciente obj = service.registrar(paciente);
        URI localtion = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdPaciente()).toUri();
        return ResponseEntity.created(localtion).build();
    }
 
     @PutMapping
-    public ResponseEntity<Paciente> modificar(@RequestBody Paciente paciente){
+    public ResponseEntity<Paciente> modificar(@RequestBody Paciente paciente) throws Exception{
         Paciente obj = service.modificar(paciente);
         return new ResponseEntity<Paciente>(obj, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable("id") Integer id){
+    public ResponseEntity<Void> eliminar(@PathVariable("id") Integer id) throws Exception{
         Paciente obj = service.listarPorId(id);
         if(obj.getIdPaciente() ==null){
             throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);

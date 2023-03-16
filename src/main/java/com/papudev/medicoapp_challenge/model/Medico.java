@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 public class Medico {
 	
 	@Id
-	@GeneratedValue(strategy =GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idMedico;
 	
 	@Column(name="nombres", nullable=false,length = 70)
@@ -17,7 +17,7 @@ public class Medico {
 	@Column(name="apellidos", nullable=false,length = 70)
 	private String apellidos;
 	
-	@Column(name="CMP", nullable=false,length = 12)
+	@Column(name="CMP", nullable=false, length = 12)
 	private String CMP;
 	
 	@Column(name="foto_url", nullable=true)
